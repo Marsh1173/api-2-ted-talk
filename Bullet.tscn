@@ -1,0 +1,26 @@
+[gd_scene load_steps=6 format=3 uid="uid://wdkdxmax1b56"]
+
+[ext_resource type="Script" path="res://Bullet.gd" id="1_4v5s5"]
+[ext_resource type="Texture2D" uid="uid://cdwnx4ljgesj2" path="res://assets/red_body_circle.png" id="1_jv0xd"]
+[ext_resource type="PackedScene" uid="uid://bwkbtuyc7q3xq" path="res://KillZone.tscn" id="2_vojta"]
+[ext_resource type="AudioStream" uid="uid://cs3mye60yuivy" path="res://assets/fire.ogg" id="4_s3w7b"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_oeg75"]
+radius = 13.0384
+
+[node name="Bullet" type="Node2D"]
+script = ExtResource("1_4v5s5")
+
+[node name="RedBodyCircle" type="Sprite2D" parent="."]
+scale = Vector2(0.231651, 0.231651)
+texture = ExtResource("1_jv0xd")
+
+[node name="KillZone" parent="." instance=ExtResource("2_vojta")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KillZone"]
+scale = Vector2(0.994551, 1)
+shape = SubResource("CircleShape2D_oeg75")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_s3w7b")
+autoplay = true

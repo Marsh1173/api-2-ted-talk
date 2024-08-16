@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://b1ubsvitkd74y"]
+
+[ext_resource type="Texture2D" uid="uid://beoaubg0wsf32" path="res://assets/tile_grey.png" id="1_5fujd"]
+[ext_resource type="Script" path="res://Turret.gd" id="1_a0ljh"]
+[ext_resource type="Texture2D" uid="uid://ba3kgsoftlaqm" path="res://assets/red_body_rhombus.png" id="2_jt7nb"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4gi6d"]
+radius = 445.405
+
+[node name="Turret" type="Node2D"]
+script = ExtResource("1_a0ljh")
+
+[node name="Barrel" type="Sprite2D" parent="."]
+scale = Vector2(1, 0.44)
+texture = ExtResource("1_5fujd")
+offset = Vector2(40, 0)
+
+[node name="RedBodyRhombus" type="Sprite2D" parent="."]
+texture = ExtResource("2_jt7nb")
+
+[node name="Aggro Zone" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Aggro Zone"]
+shape = SubResource("CircleShape2D_4gi6d")
+debug_color = Color(0.996078, 0, 0.160784, 0.0862745)
+
+[connection signal="body_entered" from="Aggro Zone" to="." method="_on_aggro_zone_body_entered"]
+[connection signal="body_exited" from="Aggro Zone" to="." method="_on_aggro_zone_body_exited"]
